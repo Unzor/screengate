@@ -1,0 +1,69 @@
+<body>
+  <div style="position: absolute; transform: translate(-50%, -50%); left: 100%;  width: 80%; top: 10%; left: 50%; background: #ff5500; color: white; height: 7%;">
+     <button id="screenshot" style="border: none; background: none; cursor: pointer; margin: 0; padding: 0; position: absolute; transform: translate(-50%, -50%); left: 50%; top: 50%;"><img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-camera-512.png" style="filter: invert(100%); width: 50px;">
+    </button>
+  </div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
+    </style>
+    <p id ="timer" style="color: white; text-shadow: 2px 2px 8px black; position: absolute; transform: translate(-50%, -50%); font-family: 'Lato', sans-serif; left: 50%; top: 50%; font-size: 400%; opacity: 0%;"> 3 </p>
+     <div id="flash" style="position:fixed; z-index: -999999999999; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; background: white; opacity: 0%;"></div>
+<img id="screen-result" style="position: absolute; transform: translate(-50%, -50%); left: 50%; top: 50%; width: 750px; height: 500px; display: none;">
+<button id="open" style="display: none; position: absolute; transform: translate(-50%, -50%); left: 50%; top: 90%;">Open in folder</button>
+<script>
+        function cd(){
+          document.getElementById('screen-result').style.display = "none";
+          document.getElementById('timer').innerText = "3";
+          document.getElementById('open').style.display="none";
+        document.body.style = "";
+        document.querySelector('div').style.display = "none";
+    document.getElementById('timer').style.opacity="100%";
+    document.getElementById('timer').style.transition="0.3s";
+var timeLeft = 2;
+var elem = document.getElementById('timer');
+
+var timerId = setInterval(countdown, 1000);
+
+function countdown() {
+  if (timeLeft == 0) {
+    clearTimeout(timerId);
+    elem.style.opacity="0%";
+    setTimeout(function(){
+      document.getElementById('flash').style.opacity="100%";
+                        document.getElementById('flash').style.transition="all 0.3s ease 0s"; 
+          setTimeout(function(){
+                  document.getElementById('flash').style.opacity="0%";
+setTimeout(function(){
+    const screenshot = require('screenshot-desktop');
+        screenshot({format: 'png'}).then((img) => {
+            var num = Math.random().toString().split('.').pop();
+fs.writeFile(`images/${num}.png`, img, function(){
+document.querySelector('#screen-result').src = 'images/' + num + '.png';
+document.querySelector('#screen-result').style.display = "block";
+document.querySelector('div').style.display = "block";
+document.getElementById('open').onclick = function(){
+  require('child_process').exec('start "" "' + __dirname + '\\images"');
+}
+document.getElementById('open').style.display="block";
+});
+}).catch((err) => {
+  // ...
+})
+}, 500)
+         }, 300)
+
+
+    }, 500)
+  } else {    
+    elem.innerHTML = timeLeft;
+    timeLeft--;
+  }
+}
+  }
+
+    var fs = require('fs');
+    document.getElementById('screenshot').onclick = function(){
+        cd();
+        };
+</script>
+</body>
